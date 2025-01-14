@@ -22,6 +22,14 @@ s.onkey(snake.move_right, "Right")
 s.onkey(snake.move_left, "Left")
 
 game_over = False
+
+def game_over_func():
+    global game_over
+    snake.snake_head.color("red")
+    s.update()
+    game_over = True
+    score.game_over()
+
 while not game_over:
     s.update()
     time.sleep(0.1)
@@ -37,15 +45,13 @@ while not game_over:
         food.spawn_random()
 
     if snake_head_xcor > 290 or snake_head_xcor < -290 or snake_head_ycor > 290 or snake_head_ycor < -290:
-        game_over = True
-        score.game_over()
+        game_over_func()
 
-    for body in snake.snake_body:
-        if body == snake.snake_head:
-            pass
-        elif snake.snake_head.distance(body) < 10:
-            game_over = True
-            score.game_over()
+    for body in snake.snake_body[3:]:
+        if snake.snake_head.distance(body) < 10:
+            body.color('red')
+            game_over_func()
+
 
 s.exitonclick()
 
