@@ -28,7 +28,11 @@ def game_over_func():
     snake.snake_head.color("red")
     s.update()
     game_over = True
-    score.game_over()
+    # score.game_over()
+
+def reset_game():
+    score.reset()
+    snake.reset_snake()
 
 while not game_over:
     s.update()
@@ -45,13 +49,14 @@ while not game_over:
         food.spawn_random()
 
     if snake_head_xcor > 290 or snake_head_xcor < -290 or snake_head_ycor > 290 or snake_head_ycor < -290:
-        game_over_func()
+        # game_over_func()
+        reset_game()
 
     for body in snake.snake_body[3:]:
         if snake.snake_head.distance(body) < 10:
             body.color('red')
-            game_over_func()
-
+            # game_over_func()
+            reset_game()
 
 s.exitonclick()
 

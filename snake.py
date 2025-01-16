@@ -58,3 +58,10 @@ class Snake:
         last_body_pos = self.snake_body[last_body_index].pos()
         snake.goto(last_body_pos)
         self.snake_body.append(snake)
+
+    def reset_snake(self):
+        for body in self.snake_body:
+            body.goto((1000,1000))
+        self.snake_body.clear()
+        self.create_snake()
+        self.snake_head = self.snake_body[0]
